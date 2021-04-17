@@ -54,7 +54,7 @@ a:hover{
     flex-direction: column;
     align-items: center;
     background-color: #dddddd;
-    height: 73rem;
+    height: 85vh;
     width: 70rem;
     margin: 0 auto;
     border-radius: 0 0 3rem 3rem;
@@ -128,7 +128,7 @@ h3{
 
 .inputBox{
    width: 55rem;
-   height: 43rem;
+   height: 40rem;
    background-color: #dddddd;
    margin-top: -4rem;
    display: grid;

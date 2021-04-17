@@ -2,7 +2,7 @@
 
 const output = document.querySelector('#output');
 const digits = document.querySelectorAll('button');
-const eqLine = document.querySelector('#eqLine');
+
 
 let operator = '';
 let firstArg = '';
@@ -24,7 +24,7 @@ const multiply = function(a,b){
 
 const divide = function(a,b){
     if(parseFloat(b) === 0){
-        return `0 can not be divided further`;
+        return `0 can't be divided`;
     } else{
         return parseFloat(a) / parseFloat(b)
     }
@@ -33,19 +33,19 @@ const divide = function(a,b){
 const operate = function(operator, num1, num2){
     switch(operator){
         case '+':
-            return add(num1, num2);
+            return add(num1, num2).toFixed(1,8);
             break;
         case '-':
-            return subtract(num1, num2);
+            return subtract(num1, num2).toFixed(1,8);
             break;
         case 'x':
-            return multiply(num1, num2);
+            return multiply(num1, num2).toFixed(1,8);
             break;
         case '/':
-            return divide(num1, num2);
+            return divide(num1, num2).toFixed(1,8);
             break;
         case '%':
-            return ((num1/num2)*100);
+            return ((num1/num2)*100).toFixed(1,8);
             break;
     }
 }
@@ -57,6 +57,8 @@ const boundsCheck = function(){
 }
 
 const firstArgOps = function(input){
+    
+    
     if(input === '.' && firstArg.includes('.')){
         return 'lollipop';
     }
@@ -85,6 +87,7 @@ const firstArgOps = function(input){
 }
 
 const secondArgOps = function(input){
+    
     if(secondArg === '' && output.textContent !== ''){
         output.textContent = '';
     }
@@ -106,16 +109,18 @@ function clearAll(){
     firstArg= '';
     operator='';
     secondArg='';
-    eqLine.textContent='';
+    
 }
 
 ///////////OPERATIONS/////////////////////
 
 digits.forEach(digit => {
+    
     digit.addEventListener('click', function(){
         if(output.textContent.includes("Answer:") && Number.isInteger(parseFloat(digit.textContent))){
             clearAll();
         }
+        
         if(Number.isInteger(parseFloat(digit.textContent)) || digit.textContent === '.' || digit.textContent === '&larr;' || digit.textContent === '%'){
             if(operator === '')
             {
@@ -131,6 +136,12 @@ digits.forEach(digit => {
             output.textContent = '';
         }
     });
+});
+
+const on = document.querySelector('#on');
+on.addEventListener('click', function(){
+    clearAll();
+    output.textContent = '0';
 });
 
 const enter = document.querySelector('#enter');
@@ -159,7 +170,7 @@ operations.forEach(operation =>{
         if (firstArg !== '' && secondArg !== ''){
             
             output.textContent = (`${operate(operator, parseFloat(firstArg), parseFloat(secondArg))}`);
-            eqLine.textContent = (`${firstArg} ${operator} ${secondArg} = ''`);
+            console.log('yes man')
             firstArg = operate(operator, parseFloat(firstArg), parseFloat(secondArg));
             secondArg = '';
             operator = operation.textContent;
